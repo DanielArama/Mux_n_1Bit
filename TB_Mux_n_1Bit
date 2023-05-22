@@ -1,0 +1,52 @@
+module TB_Mux_n_1Bit(
+ 
+    );
+    
+ parameter n=4;
+ reg [n-1:0] Data_in=4'b0;
+ reg [$clog2(n)-1:0] sel;
+ 
+ wire f;  
+    
+    
+    Mux_n_1Bit #(.n(n)) UUT(
+    .Data_in(Data_in),
+    .sel(sel),
+    .f(f)
+    );
+    
+    
+    always begin
+    #1;
+    Data_in[0]=~Data_in[0];
+    end
+    
+     always begin
+    #3;
+    Data_in[1]=~Data_in[1];
+    end
+    
+     always begin
+    #5;
+    Data_in[2]=~Data_in[2];
+    end
+    
+     always begin
+    #7;
+    Data_in[3]=~Data_in[3];
+    end
+    
+    
+    initial begin
+    sel=2'b00;
+    #9;
+    sel=2'b01;
+    #29;
+    sel=2'b10;
+    #49;
+    sel=2'b11;
+    #69;
+    $finish;
+    end
+    
+endmodule
